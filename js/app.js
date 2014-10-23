@@ -3,7 +3,7 @@
  */
 
 
-var joomlaapp = angular.module('joomlaapp', ['onsen']);
+var joomlaapp = angular.module('joomlaapp', ['onsen', 'ngSanitize']);
 
 /* Encode sql string with JSON and URL encode for the Joomla! to be able to interpret it */
 function encode_sql (sql){

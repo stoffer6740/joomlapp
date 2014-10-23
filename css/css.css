@@ -1,15 +1,51 @@
 .hover {
   border-bottom: 1px solid #dd2923;
 }
-#contacts div div {
-  margin: 10px;
-  border: 1px solid #ddd;
+.margin {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.padding {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.header {
   background-color: #f7f7f7;
   padding: 5px;
-}
-#contacts div div p {
   margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.header h2 {
+  font-size: 1.2em;
+}
+.list div div {
+  border-bottom: 1px solid #ddd;
+  background-color: #fdfdfd;
+  margin: 0;
+  height: 50px;
+  padding-right: 10px;
+}
+.list div div .list_img {
+  padding: 0;
+  float: left;
+  border: none;
+  border-radius: 5px;
+}
+.list div div p {
   color: #3a3a3a;
+  margin: 0;
+  padding: 15px;
+}
+.list div div i {
+  float: right;
+  opacity: 0.5;
+}
+.list div div:active {
+  background-color: #f7f7f7;
+}
+.list div div:last-child {
+  border: none;
 }
 #users div div {
   margin: 5px;
@@ -21,6 +57,9 @@
   margin: 0;
   color: #3a3a3a;
 }
+#users div div ._p {
+  margin: .5em;
+}
 #articles div div {
   margin: 5px;
   border: 1px solid #ddd;
@@ -30,4 +69,27 @@
 #articles div div p {
   margin: 0;
   color: #3a3a3a;
+}
+#articles div div ._p {
+  margin: .5em;
+}
+.imageContainer {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+  padding: 0px !important;
+  float: left;
+  border-bottom: none !important;
+  border-radius: 5px;
+}
+.imageCenterer {
+  width: 1000px;
+  left: 50%;
+  top: 0;
+  margin-left: -500px;
+}
+.imageCenterer img {
+  display: block;
+  margin: 0 auto;
 }

@@ -1,11 +1,13 @@
-<h2>Contacts</h2>
+<div class="header">
+    <h2>Contacts</h2>
+</div>
 
-<div id="contacts">
+<div class="list">
     <div ng-controller="GetContactsCtrl">
         <div ng-repeat="r in result">
             <p>{{r.id}}</p>
             <p>{{r.name}}</p>
-            <p>{{r.misc}}</p>
+            <p class="_p" ng-bind-html="r.misc"></p>
         </div>
     </div>
 </div>

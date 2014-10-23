@@ -50,8 +50,9 @@ joomlaapp.controller('GetArticlesCtrl', function($scope, $http){
         })
             .success(function(data, status, headers, config){
                 $scope.result = [];
+                $scope.images = [];
                 angular.forEach(data.result, function (value) {
-                    var url     = value.link.replace(/^(.*)\?/, "");
+                    var url     = value.link.replace(REGEX_LINK, "");
                     var option  = getUrlParameter(url, 'option');
                     var id      = getUrlParameter(url, 'id');
 
@@ -72,9 +73,19 @@ function getArticleFromMenu ($scope, $http, id) {
         params: {'sql':encSql}
     })
         .success(function(data, status, headers, config){
-//            var clean = data.result[0].introtext.replace(REGEX1, '\/ ');
+            var img = 'http://' + API_URL + '/' + JSON.parse(data.result[0].images).image_intro;
+            if(!JSON.parse(data.result[0].images).image_intro) {
+                $scope.images.push({
+                    'id'     : id,
+                    'image'  : ""
+                });
+            }else {
+                $scope.images.push({
+                    'id'     : id,
+                    'image'  : img
+                });
+            }
             $scope.result.push(data.result[0]);
-//            $scope.resultClean = clean;
         })
         .error(function(data, status, headers, config) {
 

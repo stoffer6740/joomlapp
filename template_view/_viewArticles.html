@@ -1,16 +1,31 @@
-<h2>Articles</h2>
+<div class="header">
+    <h2>Articles</h2>
+</div>
 
-<div id="articles">
+<div class="list">
     <!--<p>Vis</p>-->
     <!--<select ng-model="articleNo">-->
         <!--<option value="2">2</option>-->
         <!--<option value="5">5</option>-->
     <!--</select>-->
+    <!--<div ng-controller="GetArticlesCtrl">-->
+        <!--<div ng-repeat="r in result" id="_id{{r.id}}">-->
+            <!--<img ng-repeat="i in images | filter: r.id" ng-hide="!i.image" ng-src="{{i.image}}">-->
+            <!--<p><strong>{{r.title}}</strong></p>-->
+            <!--<p class="_p" ng-bind-html="r.introtext"></p>-->
+        <!--</div>-->
+    <!--</div>-->
+
     <div ng-controller="GetArticlesCtrl">
         <div ng-repeat="r in result" id="_id{{r.id}}">
-            <p>Artikel ID | {{r.id}}</p>
-            <p>{{r.introtext}}</p>
-            {{resultClean}}
+            <div class="imageContainer">
+                <div class="imageCenterer">
+                    <img ng-repeat="i in images | filter:r.id" ng-hide="!i.image" class="list_img" src="{{i.image}}">
+                </div>
+            </div>
+            <p>{{r.title}}</p>
         </div>
     </div>
+
 </div>
+

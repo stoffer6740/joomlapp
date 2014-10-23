@@ -2,12 +2,12 @@
  * Created by Christoffer on 23-10-2014.
  */
 /* URL */
-var API_URL = '192.168.0.55/joomlaapp';
-var API_REQUEST = '/index.php?option=com_webitall_app&task=api.request';
+var API_URL               = '192.168.0.55/joomlaapp';
+var API_REQUEST           = '/index.php?option=com_webitall_app&task=api.request';
 
 /* REGEX */
-var REGEX = /<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)?>/g;
-var REGEX1 = /(\/)/g;
+var REGEX_HTML            = /<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[^'">\s]+))?)+\s*|\s*)?>/g;
+var REGEX_LINK            = /^(.*)\?/;
 
 /* SQL */
 var GETARTICLEFROMMENUSQL = 'SELECT * FROM #__content WHERE id = ';
