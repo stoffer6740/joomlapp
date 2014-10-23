@@ -1,0 +1,16 @@
+<h2>Articles</h2>
+
+<div id="articles">
+    <!--<p>Vis</p>-->
+    <!--<select ng-model="articleNo">-->
+        <!--<option value="2">2</option>-->
+        <!--<option value="5">5</option>-->
+    <!--</select>-->
+    <div ng-controller="GetArticlesCtrl">
+        <div ng-repeat="r in result" id="_id{{r.id}}">
+            <p>Artikel ID | {{r.id}}</p>
+            <p>{{r.introtext}}</p>
+            {{resultClean}}
+        </div>
+    </div>
+</div>
