@@ -15,5 +15,5 @@
 
     <content src="app.html" />
     <!-- cbjerregaard Husk at ændre denne IP -->
-    <access origin="http://192.168.0.55/*" subdomains="true"/>
+    <access origin="http://192.168.0.51/*" subdomains="true"/>
 </widget>
