@@ -1,3 +1,12 @@
 /**
  * Created by Christoffer on 20-10-2014.
  */
+
+joomlaapp.directive('articleHeader', function(){
+    return {
+        restrict    : 'E',
+        replace     : 'true',
+        scope       : 'false',
+        templateUrl : 'template_directive/_dirHeader.html'
+    }
+});

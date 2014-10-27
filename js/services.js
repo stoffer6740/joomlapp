@@ -14,3 +14,16 @@ joomlaapp.service('getPageData', function(){
         }
     }
 });
+
+joomlaapp.service('getArticleByIdSrvc', function(){
+    var id;
+
+    return {
+        getId: function() {
+            return id;
+        },
+        setId: function(newId) {
+            id = newId;
+        }
+    }
+});

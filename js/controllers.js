@@ -41,22 +41,28 @@ joomlaapp.controller('GetUsersCtrl', function($scope, $http){
         })
 });
 
-joomlaapp.controller('GetArticlesCtrl', function($scope, $http){
+joomlaapp.controller('GetArticlesCtrl', ['getArticleByIdSrvc', '$scope', '$http', function(getArticleByIdSrvc, $scope, $http){
         console.log("getArticles");
+
+        $scope.GetOneArticle = function (id) {
+            getArticleByIdSrvc.setId(id);
+            navigation.pushPage('template_view/_viewArticle.html', {animation: 'slide'});
+        };
+
         var encSql = encode_sql(GETARTICLESCTRLSQL);
         $http({url: 'http://' + API_URL + API_REQUEST,
             method: 'GET',
             params: {'sql':encSql}
         })
             .success(function(data, status, headers, config){
-                $scope.result = [];
+                var unsorted = [];
                 $scope.images = [];
                 angular.forEach(data.result, function (value) {
                     var url     = value.link.replace(REGEX_LINK, "");
                     var option  = getUrlParameter(url, 'option');
                     var id      = getUrlParameter(url, 'id');
 
-                    getArticleFromMenu($scope, $http, id);
+                    getArticleFromMenu($scope, $http, id, unsorted);
                 });
             })
             .error(function(data, status, headers, config) {
@@ -64,9 +70,9 @@ joomlaapp.controller('GetArticlesCtrl', function($scope, $http){
             })
             .finally(function(){
             })
-});
+}]);
 
-function getArticleFromMenu ($scope, $http, id) {
+function getArticleFromMenu ($scope, $http, id, unsorted) {
     var encSql = encode_sql(GETARTICLEFROMMENUSQL + id);
     $http({url: 'http://' + API_URL + API_REQUEST,
         method: 'GET',
@@ -85,7 +91,18 @@ function getArticleFromMenu ($scope, $http, id) {
                     'image'  : img
                 });
             }
-            $scope.result.push(data.result[0]);
+
+            unsorted.push(data.result[0]);
+            unsorted.sort(function(a, b) {
+                if (a.id > b.id) {
+                    return 1;
+                }
+                if (a.id < b.id) {
+                    return -1;
+                }
+                return 0;
+            });
+            $scope.result = unsorted;
         })
         .error(function(data, status, headers, config) {
 
@@ -94,6 +111,37 @@ function getArticleFromMenu ($scope, $http, id) {
 
         })
 }
+
+joomlaapp.controller('GetOneArticleCtrl', ['getArticleByIdSrvc', '$scope', '$http', function(getArticlebyIdSrvc, $scope, $http){
+    console.log("Get one");
+    var aid = getArticlebyIdSrvc.getId();
+    var encSql = encode_sql(GETARTICLEFROMMENUSQL + aid);
+    $http({url: 'http://' + API_URL + API_REQUEST,
+        method: 'GET',
+        params: {'sql':encSql}
+    })
+        .success(function(data, status, headers, config){
+            $scope.result = data.result;
+            $scope.images = [];
+            var img = 'http://' + API_URL + '/' + JSON.parse(data.result[0].images).image_intro;
+            if(!JSON.parse(data.result[0].images).image_intro) {
+                $scope.images.push({
+                    'id'     : aid,
+                    'image'  : ""
+                });
+            }else {
+                $scope.images.push({
+                    'id'     : aid,
+                    'image'  : img
+                });
+            }
+        })
+        .error(function(data, status, headers, config) {
+
+        })
+        .finally(function(){
+        })
+}]);
 
 
 joomlaapp.controller('GetContactsCtrl', function($scope, $http){

@@ -1,0 +1,18 @@
+<ons-page ng-controller="GetOneArticleCtrl">
+    <div ng-repeat="r in result">
+        <article-header></article-header>
+        <div ng-repeat="i in images"  id="a-img-wrapper">
+            <div id="a-img" style="background: url('{{i.image}}') center; background-size: cover;"></div>
+        </div>
+        <div>
+            <div id="one-article" ng-bind-html="r.introtext"></div>
+        </div>
+    </div>
+
+    <script>
+
+
+    </script>
+
+</ons-page>
+

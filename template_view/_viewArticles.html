@@ -2,30 +2,19 @@
     <h2>Articles</h2>
 </div>
 
-<div class="list">
-    <!--<p>Vis</p>-->
-    <!--<select ng-model="articleNo">-->
-        <!--<option value="2">2</option>-->
-        <!--<option value="5">5</option>-->
-    <!--</select>-->
-    <!--<div ng-controller="GetArticlesCtrl">-->
-        <!--<div ng-repeat="r in result" id="_id{{r.id}}">-->
-            <!--<img ng-repeat="i in images | filter: r.id" ng-hide="!i.image" ng-src="{{i.image}}">-->
-            <!--<p><strong>{{r.title}}</strong></p>-->
-            <!--<p class="_p" ng-bind-html="r.introtext"></p>-->
-        <!--</div>-->
-    <!--</div>-->
 
-    <div ng-controller="GetArticlesCtrl">
-        <div ng-repeat="r in result" id="_id{{r.id}}">
-            <div class="imageContainer">
-                <div class="imageCenterer">
-                    <img ng-repeat="i in images | filter:r.id" ng-hide="!i.image" class="list_img" src="{{i.image}}">
-                </div>
-            </div>
-            <p>{{r.title}}</p>
-        </div>
+    <div id="ar" ng-controller="GetArticlesCtrl">
+        <ons-list>
+            <ons-list-item ng-repeat="r in result" ng-hide="!result" modifier="chevron" class="list-item-container" ng-click="GetOneArticle(r.id)">
+                <ons-row>
+                    <ons-col>
+                        <div class="desc">
+                            {{r.title}} | {{r.id}}
+                        </div>
+                    </ons-col>
+                </ons-row>
+            </ons-list-item>
+        </ons-list>
     </div>
 
-</div>
 
