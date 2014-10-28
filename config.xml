@@ -13,7 +13,8 @@
         Christoffer Bjerregaard
     </author>
 
-    <content src="app.html" />
+    <content src="index.html" />
+
     <!-- cbjerregaard Husk at ændre denne IP -->
-    <access origin="http://192.168.0.51/*" subdomains="true"/>
+    <access origin="http://192.168.0.55/*" subdomains="true"/>
 </widget>

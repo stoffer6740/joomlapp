@@ -4,6 +4,7 @@
 
 
     <div id="ar" ng-controller="GetArticlesCtrl">
+        <input type="button" ng-click="getResults(3)">
         <ons-list>
             <ons-list-item ng-repeat="r in result" ng-hide="!result" modifier="chevron" class="list-item-container" ng-click="GetOneArticle(r.id)">
                 <ons-row>

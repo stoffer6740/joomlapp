@@ -27,3 +27,16 @@ joomlaapp.service('getArticleByIdSrvc', function(){
         }
     }
 });
+
+joomlaapp.service('getContactByIdSrvc', function() {
+    var id;
+
+    return {
+       getId: function () {
+           return id;
+       },
+       setId: function (newId) {
+           id = newId;
+       }
+    }
+});

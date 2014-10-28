@@ -1,0 +1,71 @@
+<ons-page  ng-controller="GetOneContactCtrl">
+    <app-header></app-header>
+<div id="ar">
+    <ons-list>
+        <div ng-repeat="r in result" ng-hide="!result"  >
+        <li class="list__header">
+            Name
+        </li>
+        <ons-list-item class="list-item-container">
+            <ons-row>
+                <ons-col>
+                    {{r.name}}
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+
+        <ons-list-item class="list-item-container">
+            <ons-row>
+                <ons-col ng-bind-html="r.misc">
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+
+        <ons-list-item ng-hide="!r.email_to" class="list-item-container">
+            <ons-row>
+                <ons-col>
+                    {{r.email_to}}
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+
+        <ons-list-item ng-hide="!r.telephone" class="list-item-container">
+            <ons-row>
+                <ons-col>
+                    {{r.telephone}}
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+
+        <ons-list-item ng-hide="!r.mobile" class="list-item-container">
+            <ons-row>
+                <ons-col>
+                    {{r.mobile}}
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+
+        <li class="list__header">
+            Personal
+        </li>
+
+        <ons-list-item ng-hide="!r.address" class="list-item-container">
+            <ons-row>
+                <ons-col>
+                    {{r.address}}
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+
+        <ons-list-item ng-hide="!r.suburb" class="list-item-container">
+            <ons-row>
+                <ons-col>
+                    {{r.postcode}} - {{r.suburb}}
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+
+        </div>
+    </ons-list>
+</div>
+</ons-page>

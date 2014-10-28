@@ -3,7 +3,7 @@
  */
 
 joomlaapp.controller('AppCtrl', function($scope){
-
+    $scope.pageTitle = "";
 });
 
 joomlaapp.controller('MenuCtrl', [ '$scope', '$http', 'getPageData', function($scope, $http, getPageData){
@@ -24,6 +24,7 @@ joomlaapp.controller('MenuCtrl', [ '$scope', '$http', 'getPageData', function($s
 }]);
 
 joomlaapp.controller('GetUsersCtrl', function($scope, $http){
+    $scope.pageTitle = "Users";
     var encSql = encode_sql(GETUSERSCTRLSQL);
     $http({url      : 'http://' + API_URL + API_REQUEST,
            method   : 'GET',
@@ -42,6 +43,7 @@ joomlaapp.controller('GetUsersCtrl', function($scope, $http){
 });
 
 joomlaapp.controller('GetArticlesCtrl', ['getArticleByIdSrvc', '$scope', '$http', function(getArticleByIdSrvc, $scope, $http){
+    $scope.pageTitle = "Articles";
         console.log("getArticles");
 
         $scope.GetOneArticle = function (id) {
@@ -49,27 +51,29 @@ joomlaapp.controller('GetArticlesCtrl', ['getArticleByIdSrvc', '$scope', '$http'
             navigation.pushPage('template_view/_viewArticle.html', {animation: 'slide'});
         };
 
-        var encSql = encode_sql(GETARTICLESCTRLSQL);
-        $http({url: 'http://' + API_URL + API_REQUEST,
-            method: 'GET',
-            params: {'sql':encSql}
-        })
-            .success(function(data, status, headers, config){
-                var unsorted = [];
-                $scope.images = [];
-                angular.forEach(data.result, function (value) {
-                    var url     = value.link.replace(REGEX_LINK, "");
-                    var option  = getUrlParameter(url, 'option');
-                    var id      = getUrlParameter(url, 'id');
+//        $scope.getResults = function (num) {
+            var encSql = encode_sql(GETALLARTICLESSQL);
+            $http({url: 'http://' + API_URL + API_REQUEST,
+                method: 'GET',
+                params: {'sql':encSql}
+            })
+                .success(function(data, status, headers, config){
+                    var unsorted = [];
+                    $scope.images = [];
+                    angular.forEach(data.result, function (value) {
+                        var url     = value.link.replace(REGEX_LINK, "");
+                        var option  = getUrlParameter(url, 'option');
+                        var id      = getUrlParameter(url, 'id');
 
-                    getArticleFromMenu($scope, $http, id, unsorted);
-                });
-            })
-            .error(function(data, status, headers, config) {
+                        getArticleFromMenu($scope, $http, id, unsorted);
+                    });
+                })
+                .error(function(data, status, headers, config) {
 
-            })
-            .finally(function(){
-            })
+                })
+                .finally(function(){
+                })
+//        }
 }]);
 
 function getArticleFromMenu ($scope, $http, id, unsorted) {
@@ -144,7 +148,14 @@ joomlaapp.controller('GetOneArticleCtrl', ['getArticleByIdSrvc', '$scope', '$htt
 }]);
 
 
-joomlaapp.controller('GetContactsCtrl', function($scope, $http){
+joomlaapp.controller('GetContactsCtrl', ['getContactByIdSrvc', '$http', '$scope', function(getContactByIdSrvc, $http, $scope){
+
+    $scope.pageTitle = "Contacts";
+    $scope.GetOneContact = function (id) {
+        getContactByIdSrvc.setId(id);
+        navigation.pushPage('template_view/_viewContact.html', {animation: 'slide'});
+    };
+
     var encSql = encode_sql(GETCONTACTSCTRLSQL);
     $http({url      : 'http://' + API_URL + API_REQUEST,
         method   : 'GET',
@@ -158,4 +169,22 @@ joomlaapp.controller('GetContactsCtrl', function($scope, $http){
         })
         .finally(function(){
         })
-});
+}]);
+
+joomlaapp.controller('GetOneContactCtrl', ['getContactByIdSrvc', '$http', '$scope', function(getContactByIdSrvc, $http, $scope){
+    console.log("Get one");
+    var cid = getContactByIdSrvc.getId();
+    var encSql = encode_sql(GETCONTACTSQL + cid);
+    $http({url: 'http://' + API_URL + API_REQUEST,
+        method: 'GET',
+        params: {'sql':encSql}
+    })
+        .success(function(data, status, headers, config){
+            $scope.result = data.result;
+        })
+        .error(function(data, status, headers, config) {
+
+        })
+        .finally(function(){
+        })
+}]);
